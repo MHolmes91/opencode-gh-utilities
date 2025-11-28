@@ -21,13 +21,15 @@ The skills rely on the GitHub CLI plus jq for JSON shaping. Install everything w
 make deps
 ```
 
+> Prerequisite: make sure Node.js (with npm) is installed before running `make deps`. The script installs global npm packages but does not install Node itself.
+
 `make deps` ensures:
 
-- `gh` – GitHub CLI authenticated with `gh auth login --scopes repo,workflow`.
-- `jq` – lightweight JSON processor used by skill shell snippets.
-- `python3` + `pip` – installs `opencode`, `openskills`, and helper libraries from `requirements.txt`.
+- `gh` – GitHub CLI installed via your package manager (brew, apt, or pacman) and authenticated with `gh auth login --scopes repo,workflow`.
+- `jq` – lightweight JSON processor installed via the same package manager.
+- `opencode` + `openskills` – installed globally through `npm install -g ...` (requires Node.js/npm on your system).
 
-> **Note:** `scripts/install_deps.sh` attempts to use Homebrew on macOS and `apt-get` on Linux. If neither is available you will be prompted to install the binaries manually.
+> **Note:** `scripts/install_deps.sh` tries Homebrew first, then apt-get, then pacman for CLI dependencies. If none are available you will be prompted to install things manually.
 
 ## Environment Variables
 
