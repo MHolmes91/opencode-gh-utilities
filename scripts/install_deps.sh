@@ -66,17 +66,30 @@ if ! command_exists npm; then
   exit 1
 fi
 
-ensure_npm_package() {
-  local package="$1"
+ensure_npm_tool() {
+  local binary="$1"
+  local package="$2"
+  if command_exists "$binary"; then
+    echo "Found ${binary}"
+    return
+  fi
+
   if npm list -g "$package" >/dev/null 2>&1; then
-    echo "Found ${package} (npm global)"
+    echo "Found ${package} globally but ${binary} not in PATH; continuing"
   else
     echo "Installing ${package} with npm"
     npm install -g "$package"
   fi
+
+  if command_exists "$binary"; then
+    echo "${binary} installed"
+  else
+    echo "${binary} still missing; ensure npm globals are on PATH." >&2
+    exit 1
+  fi
 }
 
-ensure_npm_package opencode
-ensure_npm_package openskills
-
+ensure_npm_tool opencode opencode-ai
+ensure_npm_tool openskills openskills
 echo "Dependencies installed."
+
