@@ -53,7 +53,7 @@ This will:
 
 1. Copy every file under `commands/` into `~/.config/opencode/command/` so they are available via `/` commands in the TUI. If you pass `DIR=/some/project`, files install under `/some/project/.opencode/command/` instead.
 2. Copy the agent markdown files into `~/.config/opencode/agent/` (or `DIR/.opencode/agent/`) and register the top-level agent plus both subagents with Opencode (when the CLI is installed).
-3. Install and sync the local SKILL catalog through `openskills install . --universal -y` followed by `openskills sync`.
+3. Install and sync the local SKILL catalog through `openskills install file://$(pwd) --universal -y` followed by `openskills sync`.
 
 Each run writes a manifest at `~/.config/opencode/.gh_ops_manifest` (or `DIR/.opencode/.gh_ops_manifest`) so any previously installed commands/agents from this package are removed before copying new versions. That keeps updates clean and makes rerunning safe.
 
@@ -123,7 +123,7 @@ cp commands/*.md ~/.config/opencode/command/
 opencode agents add agents/gh-ops.md --force
 opencode agents add agents/subagents/gh-workflow-controller.md --force
 opencode agents add agents/subagents/gh-pr-issue-controller.md --force
-openskills install . --universal -y
+openskills install file://$(pwd) --universal -y
 openskills sync
 ```
 

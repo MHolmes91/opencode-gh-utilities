@@ -25,7 +25,7 @@ remove_previous_install() {
   while IFS= read -r relpath; do
     [ -n "$relpath" ] || continue
     rm -f "$TARGET_ROOT/$relpath"
-  done < "$manifest"
+  done <"$manifest"
 }
 
 remove_previous_install "$MANIFEST_FILE"
@@ -41,7 +41,7 @@ for file in "$COMMAND_SRC"/*.md; do
   NEW_MANIFEST+=("command/$base")
 done
 
-echo "Installed command templates into $COMMAND_DEST."
+echo "Installed commands into $COMMAND_DEST."
 
 for file in "$ROOT_DIR"/agents/*.md; do
   [ -e "$file" ] || continue
@@ -59,20 +59,7 @@ for file in "$ROOT_DIR"/agents/subagents/*.md; do
   NEW_MANIFEST+=("agent/$base")
 done
 
-echo "Installed agent templates into $AGENT_DEST."
-
-printf '%s
-' "${NEW_MANIFEST[@]}" > "$MANIFEST_FILE"
-
-if command_exists opencode; then
-  echo "Registering agents and subagents"
-  opencode agents add "$AGENT_FILE" --force >/dev/null
-  for subagent in "${SUBAGENTS[@]}"; do
-    opencode agents add "$subagent" --force >/dev/null
-  done
-else
-  echo "opencode CLI not found; skipping agent registration."
-fi
+echo "Installed agents into $AGENT_DEST."
 
 if command_exists openskills; then
   echo "Syncing OpenSkills catalog"
