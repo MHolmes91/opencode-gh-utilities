@@ -1,6 +1,6 @@
-# GitHub Operations Skills Pack
+# opencode-gh-utilities
 
-A set of OpenSkills-driven gh automations plus Opencode agents, subagents, and commands that keep workflows and pull requests healthy. Everything lives directly in this repository so it can be installed locally or imported into another project.
+A set of OpenSkills-driven gh automations plus Opencode agents, subagents, and commands that keep workflows and pull requests healthy. Everything lives directly in the opencode-gh-utilities repository so it can be installed locally or imported into another project.
 
 ## Contents
 
@@ -30,16 +30,6 @@ make deps
 - `opencode` + `openskills` – installed globally through `npm install -g ...` (requires Node.js/npm on your system).
 
 > **Note:** `scripts/install_deps.sh` tries Homebrew first, then apt-get, then pacman for CLI dependencies. If none are available you will be prompted to install things manually.
-
-## Environment Variables
-
-Export the repository defaults before running the init step so skills know which repo to target:
-
-```bash
-export GITHUB_REPOSITORY=owner/repo
-export GITHUB_TOKEN=ghp_your_token_with_repo_and_workflow_scopes
-export DEFAULT_BRANCH=main
-```
 
 ## Initialize Everything
 
